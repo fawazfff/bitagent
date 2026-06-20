@@ -1,0 +1,4 @@
+Timestamp,Symbol,Direction,Leverage,Risk Level,Entry Price,Exit Price,Size (USD),PnL (USD),PnL (%),Balance Before,Balance After,Status,Thesis
+2026-06-20T22:00:38.410Z,BTCUSDT,LONG,10,medium,63967.90,63967.90,2000.00,0.00,0.00,20000.00,20000.00,CLOSED,"LONG BTC at $63,967.9. 24h range: $63,014.7 - $64,361.1. Change: 1.42%. Risk level: medium."
+2026-06-20T22:00:37.729Z,BTCUSDT,LONG,10,medium,63963.80,OPEN,2000.00,0.00,0.00,20000.00,N/A,OPEN,"LONG BTC at $63,963.8. 24h range: $63,014.7 - $64,361.1. Change: 1.42%. Risk level: medium."
+2026-06-20T22:00:29.241Z,BTCUSDT,LONG,10,medium,63963.80,OPEN,2000.00,0.00,0.00,20000.00,N/A,OPEN,"LONG BTC at $63,963.8. 24h range: $63,014.7 - $64,361.1. Change: 1.42%. Risk level: medium."

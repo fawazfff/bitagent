@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Conversation {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  messages  Message[]
+}
+
+model Message {
+  id             String        @id @default(cuid())
+  conversationId String
+  conversation   Conversation  @relation(fields: [conversationId], references: [id])
+  role           String        // "user" | "agent"
+  content        String
+  tradeData      String?       // JSON string of TradePlan when role=agent
+  createdAt      DateTime      @default(now())
+}
+
+model Trade {
+  id          String   @id @default(cuid())
+  symbol      String   // e.g. "BTCUSDT"
+  direction   String   // "LONG" | "SHORT"
+  leverage    Int
+  riskLevel   String   // "low" | "medium" | "high"
+  entry       Float
+  stopLoss    Float
+  takeProfit  Float
+  size        Float    // notional USD
+  status      String   @default("OPEN") // "OPEN" | "CLOSED"
+  pnl         Float?
+  pnlPercent  Float?
+  closePrice  Float?
+  thesis      String
+  reason      String
+  conversationId String?
+  openedAt    DateTime @default(now())
+  closedAt    DateTime?
+}

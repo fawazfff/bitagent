@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0b0e14;
+  --foreground: #e6edf3;
+  --surface: #131722;
+  --surface-2: #1c2030;
+  --surface-3: #242836;
+  --border: #2a2e3e;
+  --accent: #2962ff;
+  --accent-glow: #2962ff33;
+  --green: #26a69a;
+  --green-bg: #26a69a18;
+  --red: #ef5350;
+  --red-bg: #ef535018;
+  --yellow: #f0b90b;
+  --yellow-bg: #f0b90b18;
+  --text-muted: #6b7280;
+  --text-dim: #9ca3af;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-green: var(--green);
+  --color-red: var(--red);
+  --color-yellow: var(--yellow);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 var(--accent-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px 4px var(--accent-glow);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.35s ease-out forwards;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Typing indicator */
+@keyframes blink {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+.typing-dot:nth-child(1) { animation: blink 1.4s infinite 0s; }
+.typing-dot:nth-child(2) { animation: blink 1.4s infinite 0.2s; }
+.typing-dot:nth-child(3) { animation: blink 1.4s infinite 0.4s; }
