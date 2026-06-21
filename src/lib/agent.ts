@@ -116,12 +116,43 @@ Rules:
         : "medium",
     };
   } catch {
+    // Fallback: parse locally when OpenAI is unavailable
+    const upper = userMessage.toUpperCase();
+    
+    // Extract symbol
+    const symbols = ["BTC", "ETH", "SOL", "DOGE", "XRP", "ADA", "AVAX", "LINK", "DOT", "MATIC", "ARB", "OP", "SUI", "APT", "NEAR", "ATOM", "FIL", "LTC", "BCH", "SHIB", "PEPE", "WIF", "BONK", "TRX", "TON"];
+    let rawSymbol = "BTC";
+    for (const sym of symbols) {
+      if (upper.includes(sym)) {
+        rawSymbol = sym;
+        break;
+      }
+    }
+    
+    // Extract direction
+    let direction: "LONG" | "SHORT" = "LONG";
+    if (/SHORT|SELL|BEARISH/i.test(userMessage)) {
+      direction = "SHORT";
+    }
+    
+    // Extract leverage
+    const leverageMatch = userMessage.match(/(\d+)\s*x/i);
+    const leverage = leverageMatch ? Math.min(125, Math.max(1, parseInt(leverageMatch[1]))) : 10;
+    
+    // Extract risk level
+    let riskLevel: "low" | "medium" | "high" = "medium";
+    if (/conservative|safe|low risk/i.test(userMessage)) {
+      riskLevel = "low";
+    } else if (/aggressive|high risk|degen/i.test(userMessage)) {
+      riskLevel = "high";
+    }
+    
     return {
-      rawSymbol: "BTC",
-      symbol: "BTCUSDT",
-      direction: "LONG",
-      leverage: 10,
-      riskLevel: "medium",
+      rawSymbol,
+      symbol: resolveSymbol(rawSymbol),
+      direction,
+      leverage,
+      riskLevel,
     };
   }
 }
